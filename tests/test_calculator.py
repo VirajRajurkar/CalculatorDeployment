@@ -13,5 +13,5 @@ class TestCalculator(unittest.TestCase):
     def test_invalidOperation(self):
         self.assertEqual(Calculator.calculate("invalid operation", 2, 1), "Error: Invalid operation")
     
-    if __name__ == "main":
-        unittest.main()
+if __name__ == "__main__":
+    unittest.main()
