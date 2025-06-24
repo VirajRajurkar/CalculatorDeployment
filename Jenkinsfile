@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'rs1-cpu' }  // or 'anton-cpu', whichever has DIND
+    agent { label 'rs1-cpu' }  
 
     stages {
         stage('Clone') {
@@ -8,9 +8,17 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Unit Test') {
+            agent {
+                docker {
+                    image 'python:3.10-slim'
+                }
+            }
             steps {
-                sh 'python3 -m unittest discover tests'
+                sh '''
+                    pip install -r requirements.txt || true  # skip if empty
+                    python -m unittest discover tests
+                '''
             }
         }
 
