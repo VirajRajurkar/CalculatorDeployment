@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh 'python3 -m unittest discover tests'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t simple-calc .'
